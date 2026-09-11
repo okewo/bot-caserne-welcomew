@@ -1,0 +1,18 @@
+{
+  "presence": {
+    "status": "online",
+    "activity": "La Caserne des Trolleurs",
+    "type": "Watching"
+  },
+  "embed": {
+    "color": "#8B00FF",
+    "title": "Bienvenue sur le serveur !",
+    "description": "{user} nous a rejoint !\nNous sommes maintenant **{count}** membres.\nSon compte a été créé {created}.",
+    "footer": "Bienvenue dans la communauté !",
+    "image": "./welcome.jpg"
+  },
+  "autoRoleId": "",
+  "dm": {
+    "enabled": false,
+    "message": "Bienvenue sur {server} ! Pense à lire le règlement."
+  },
