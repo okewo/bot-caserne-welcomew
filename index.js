@@ -7,7 +7,7 @@ const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers]
 });
 
-client.once('clientReady', () => {
+const onReady = () => {
   console.log(`✅ Connecté en tant que ${client.user.tag}`);
 
   client.user.setPresence({
@@ -17,7 +17,11 @@ client.once('clientReady', () => {
       type: ActivityType[config.presence.type]
     }]
   });
-});
+};
+
+// Compatible avec toutes les versions de discord.js v14
+client.once('clientReady', onReady);
+client.once('ready', onReady);
 
 client.on('guildMemberAdd', async (member) => {
   try {
@@ -68,3 +72,36 @@ client.on('guildMemberAdd', async (member) => {
   }
 });
 
+// Message de départ (optionnel)
+client.on('guildMemberRemove', async (member) => {
+  if (!config.leave.enabled) return;
+  const channel = member.guild.channels.cache.get(process.env.WELCOME_CHANNEL);
+  if (!channel) return;
+
+  const embed = new EmbedBuilder()
+    .setColor(config.leave.color)
+    .setDescription(
+      config.leave.message
+        .replace('{tag}', member.user.tag)
+        .replace('{count}', member.guild.memberCount)
+    );
+
+  channel.send({ embeds: [embed] }).catch(() => {});
+});
+
+process.on('unhandledRejection', (e) => console.error('Erreur non gérée :', e));
+
+if (!process.env.TOKEN) {
+  console.error('❌ La variable TOKEN est vide ou absente.');
+  process.exit(1);
+}
+if (!process.env.WELCOME_CHANNEL) {
+  console.error('❌ La variable WELCOME_CHANNEL est vide ou absente.');
+}
+
+console.log('⏳ Connexion à Discord...');
+client.login(process.env.TOKEN.trim())
+  .catch(err => {
+    console.error('❌ Échec de connexion :', err.message);
+    process.exit(1);
+  });
