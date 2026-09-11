@@ -9,7 +9,17 @@
     "title": "Bienvenue sur le serveur !",
     "description": "{user} nous a rejoint !\nNous sommes maintenant **{count}** membres.\nSon compte a été créé {created}.",
     "footer": "Bienvenue dans la communauté !",
-    "image": "./welcome.jpg"
+    "image": "./welcome.jpg",
+    "colors": [
+      "#E53935",
+      "#FB8C00",
+      "#FDD835",
+      "#43A047",
+      "#00ACC1",
+      "#5865F2",
+      "#8B00FF",
+      "#EC407A"
+    ]
   },
   "autoRoleId": "",
   "dm": {
