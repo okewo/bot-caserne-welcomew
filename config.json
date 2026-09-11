@@ -5,7 +5,7 @@
     "type": "Watching"
   },
   "embed": {
-    "color": "#8B00FF",
+    "color": "#4CAF50",
     "title": "Bienvenue sur le serveur !",
     "description": "{user} nous a rejoint !\nNous sommes maintenant **{count}** membres.\nSon compte a été créé {created}.",
     "footer": "Bienvenue dans la communauté !",
@@ -16,3 +16,9 @@
     "enabled": false,
     "message": "Bienvenue sur {server} ! Pense à lire le règlement."
   },
+  "leave": {
+    "enabled": false,
+    "color": "#4B0082",
+    "message": "**{tag}** a quitté le serveur. Nous sommes maintenant {count} membres."
+  }
+}
