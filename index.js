@@ -23,6 +23,8 @@ const onReady = () => {
 client.once('clientReady', onReady);
 client.once('ready', onReady);
 
+let colorIndex = 0;
+
 client.on('guildMemberAdd', async (member) => {
   try {
     const channel = member.guild.channels.cache.get(process.env.WELCOME_CHANNEL);
@@ -30,8 +32,14 @@ client.on('guildMemberAdd', async (member) => {
 
     const created = `<t:${Math.floor(member.user.createdTimestamp / 1000)}:R>`;
 
+    // Couleur qui alterne à chaque arrivée
+    const palette = config.embed.colors;
+    const color = Array.isArray(palette) && palette.length
+      ? palette[colorIndex++ % palette.length]
+      : config.embed.color;
+
     const embed = new EmbedBuilder()
-      .setColor(config.embed.color)
+      .setColor(color)
       .setTitle(config.embed.title)
       .setDescription(
         config.embed.description
